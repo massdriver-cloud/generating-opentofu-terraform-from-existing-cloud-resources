@@ -11,7 +11,7 @@ It's important to point out, however, that not all cloud resources are supported
 ### Setup
 
 ```shell
-cd src
+cd modules/aws-aurora-postgresql
 tofo init
 ```
 
