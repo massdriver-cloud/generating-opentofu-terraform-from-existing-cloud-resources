@@ -1,6 +1,8 @@
-# Generating IaC from Existing Cloud Resources
+# Generating OpenTofu / Terraform from Existing Cloud Resources
 
 This webinar will focus on OpenTofu, but the methods we discuss today will also work with Terraform. All you have to do is simply replace `tofu` with `terraform` in the code samples.
+
+Watch a recording of the [Generating OpenTofu / Terraform from Existing Cloud Resources Webinar](https://www.massdriver.cloud/webinars/generating-infrastructure-as-code-from-existing-cloud-resources).
 
 ## Using Terraformer
 
