@@ -1,0 +1,22 @@
+Write the terraform `import` block code to import the list of resources into the appropriate terraform resources. 
+
+I'll be using the experimental "-generate-config-out" flag on `terraform plan` so you do not need to add resource blocks.
+
+Here is an example of what I'm looking for each resource.
+
+```hcl
+import {
+  id = "SOME ID HERE"
+  to = azurerm_postgresql_flexible_server.main
+}
+```
+
+Name each resource 'main' by default.
+
+If there are multiple of the same resource type, just call them "main-0", "main-1" etc.
+
+Finally, print the commands to import them into state as well as comments at the bottom of your output. Just a note, I'm using opentofu instead of terraform, they are identical in CLI usage, please output the binary name as `tofu` instead of `terraform`.
+
+I don't need a lecture, just print the code and the commands.
+
+Resources:
