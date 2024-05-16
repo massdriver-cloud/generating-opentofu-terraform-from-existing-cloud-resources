@@ -1,6 +1,6 @@
 .PHONY: reset
 
 reset:
-	-rm module/{generated.tf,terraform.tfstate,terraform.tfstate.backup,.terraform.lock.hcl}
-	echo "" > module/import.tf
-	cd module && tofu init
+	rm -rf module/{staging,prod}
+	cp -R assets/base_module module/staging
+	cp -R assets/base_module module/prod

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Function to list Azure resources by multiple tags and extract their IDs
+# list Azure resources by multiple tags and extract their IDs
 function azure_resource_list_and_tags() {
     local key1="${1%%=*}"
     local value1="${1#*=}"
@@ -10,7 +10,7 @@ function azure_resource_list_and_tags() {
     az resource list --tag "$key1=$value1" --tag "$key2=$value2" | jq -r "[.[] | select(.tags[\"$key1\"] == \"$value1\" and .tags[\"$key2\"] == \"$value2\") | .id]"
 }
 
-# Function to list AWS resources by multiple tags and extract their IDs/ARNs
+# list AWS resources by multiple tags and extract their IDs/ARNs
 function aws_resource_list_and_tags() {
     local key1="${1%%=*}"
     local value1="${1#*=}"
@@ -20,7 +20,7 @@ function aws_resource_list_and_tags() {
     aws resourcegroupstaggingapi get-resources --tag-filters Key="$key1",Values="$value1" Key="$key2",Values="$value2" --query 'ResourceTagMappingList[].ResourceARN' --output json
 }
 
-# Check if the correct number of arguments is provided
+# Check arg count
 if [ "$#" -ne 3 ]; then
     echo "Usage: $0 <cloud> <key1=value1> <key2=value2>"
     echo "Example: $0 aws md-project=geniac md-target=staging"

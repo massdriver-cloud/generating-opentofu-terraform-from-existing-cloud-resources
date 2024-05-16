@@ -15,6 +15,8 @@ Name each resource 'main' by default.
 
 If there are multiple of the same resource type, just call them "main-0", "main-1" etc.
 
+Never add an integer to the end of a resource name unless there are more than one of that resource type in the list of IDs.
+
 Finally, print the commands to import them into state as well as comments at the bottom of your output. Just a note, I'm using opentofu instead of terraform, they are identical in CLI usage, please output the binary name as `tofu` instead of `terraform`.
 
 I don't need a lecture, just print the code and the commands.
