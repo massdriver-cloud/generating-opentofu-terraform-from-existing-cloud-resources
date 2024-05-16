@@ -1,0 +1,20 @@
+Examine this Terraform source code. 
+
+There are a number of resource attributes that are hard coded that could be referenced from other resources.
+
+A few examples:
+* AWS ARNs
+* Resource IDs
+* UUIDs
+* Resource URLs
+* DNS Zones, DNS Domains
+
+When attributes are hard coded and a resource is in the module provides an attribute that can be referenced, reference it.
+
+Don't add any variables, just cross reference resources where applicable.
+
+Don't add any resources that arent already in the module.
+
+Be sure not to conflate similar resources like subnets with networks or db instances with db clusters.
+
+I need you to return the code in its entirety, not just the changes. 

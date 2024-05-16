@@ -1,0 +1,108 @@
+Find all Terraform resource blocks that end with a hyphen followed by a number. For example: main-0, main-1, main-2
+
+Convert them to a single resource block with a for_each. Use locals to store the current attributes for each resource and iterate through them.
+
+NEVER change a resource to use for_each if its terraform resource name doesn't end in a hyphen followed by a number.
+
+For example, these terraform resource does not end in a hyper and number, so do not back it out to a local and for_each.
+```hcl
+
+resource "example_resource" "main" {}
+resource "example_resource" "this" {}
+resource "example_resource" "main_queue" {}
+```
+
+If there is an obvious identifier in the resource use that as the for_each key. If there is not, then use the incrementing name of the original Terraform resource.
+
+Do not omit any other resources.
+
+I need you to return the code in its entirety, not just the changes. Never ever omit attributes.
+
+Finally, print the commands to edit the state file to move any resources that changed.
+
+Examples:
+
+## Resources with a natural / obvious ID
+
+A file name is a good example as it will be unique on the disk. Other good examples are UUIDs, AWS ARNs, or resource IDs.
+
+### Bad
+
+```hcl
+resource "local_file" "file-0" {
+  filename = "hello.txt"
+  content  = "hello"
+}
+
+resource "local_file" "file-1" {
+  filename = "goodbye.txt"
+  content  = "goodbye"
+}
+```
+
+### Good
+
+```hcl
+locals {
+  files = {
+    "hello.txt"   = "hello"
+    "goodbye.txt" = "goodbye"
+  }
+}
+
+resource "local_file" "files" {
+  for_each = local.files
+  filename = each.key
+  content  = each.value
+}
+```
+
+## Resources without a natural / obvious ID
+
+Resources that just have a name that cannot be guaranteed to be unique or a number with a high chance of being a duplicate are examples of resources without a natural IDs.
+
+### Bad
+
+```hcl
+resource "favorite_number" "fav-0" {
+  name = "homer"
+  number = 742
+}
+
+resource "favorite_number" "fav-1" {
+  name = "fox"
+  number = 42
+}
+
+resource "favorite_number" "fav-2" {
+  name = "arthur"
+  number = 42
+}
+```
+
+### Good
+
+```hcl
+locals {
+  favs = {
+    "fav-0"   = {
+      name = "homer"
+      number = 742
+    }
+    "fav-1"   = {
+      name = "fox"
+      number = 42
+    }
+    "fav-2"   = {
+      name = "arthur"
+      number = 742
+    }    
+  }
+}
+
+resource "favorite_number" "fav" {
+  for_each = local.favs
+  name = each.value.name
+  number = each.value.number
+}
+```

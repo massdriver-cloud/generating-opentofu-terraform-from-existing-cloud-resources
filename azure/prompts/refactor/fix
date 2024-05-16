@@ -1,0 +1,7 @@
+Determine the fix for the errors in the provided terraform code. 
+
+The errors come from running 'terraform plan'. 
+
+Make sure there is a change/fix for every error.
+
+Give me the full source code I provided only making the changes necessary to fix the errors. Every resource block I provided should be printed back, not just the corrected ones.

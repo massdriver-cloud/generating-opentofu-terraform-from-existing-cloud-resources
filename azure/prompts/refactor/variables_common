@@ -1,0 +1,46 @@
+Extract common Terraform module variables out from each resource.
+
+Below are common "friendly" names for Terraform input variables to replace, only create variables for attributes that fit these descriptions.
+* Tags
+* Docker Image / Tag
+* AWS Region
+* AWS Instance Types
+* AWS AMI ID
+* Azure Location
+* Azure Resource Group Name
+* Azure VM Size
+* Azure Storage Account Name
+* GCP Region
+* GCP Project ID
+* GCP Machine Type
+
+Do not extract variables for any attribute that can likely be referenced from another resource in this module.
+
+Do not try to overly interpolate strings.
+
+Do not omit any other resources.
+
+Do not omit any attributes that were set. Do not add any new ones. Only replace with variable references.
+
+Use common variable naming conventions.
+
+I need you to return the code in its entirety, not just the changes as it can be tedious to make each change on my end.
+
+A few syntax notes / reminders:
+
+## Variables cannot be referenced from variables
+
+The following is a syntax error. The 'tags' variable cannot reference the 'environment' variable. In cases like this just hard code both defaults.
+
+```hcl
+variable "environment" {
+  default = "SOME_DEFAULT"
+}
+
+variable "tags" {
+  default = {
+    project = "SOME_DEFAULT"
+    environment = var.environment
+  }
+}
+```
